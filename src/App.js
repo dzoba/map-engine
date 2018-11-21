@@ -6,14 +6,22 @@ import theMap from './map.js'
 import { map } from 'lodash';
 
 const basicView = [
-  [0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0]
+  [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+  [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+  [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+  [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+  [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+  [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+  [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+  [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+  [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+  [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}]
 ];
+
+const typeToColorMap = {
+  blocked: '#333',
+  openLand: '#888'
+}
 
 class App extends Component {
   constructor(props){
@@ -68,13 +76,16 @@ class App extends Component {
     locX: 15,
     locY: 15,
     view: [
-      [0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0]
+      [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+      [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+      [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+      [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+      [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+      [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+      [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+      [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+      [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+      [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}]
     ]
   };
 
@@ -82,20 +93,24 @@ class App extends Component {
     const topLeftX = newCoords.locX - 3;
     const topLeftY = newCoords.locY - 3;
 
+    console.log('X, Y', newCoords.locX, newCoords.locY)
+
     let newView = [
-      [0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0]
+      [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+      [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+      [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+      [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+      [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+      [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+      [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+      [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+      [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}],
+      [{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'},{tyleType: 'blocked'}, {tyleType: 'blocked'}]
     ];
 
-    for(let i = 0; i < 7; i++) {
-      for(let j = 0; j < 7; j++) {
-        debugger;
-        if(topLeftX + i >= 0) {
+    for(let i = 0; i < newView.length; i++) {
+      for(let j = 0; j < newView[0].length; j++) {
+        if(topLeftX + i >= 0 && topLeftX + i < theMap.length) {
           newView[i][j] = theMap[topLeftX + i][topLeftY + j];
         }
       }
@@ -113,25 +128,45 @@ class App extends Component {
 
   render() {
     return (
-      <div {...ArrowKeysReact.events} tabIndex="1" style={{width: '100%', height: '100%', backgroundColor: 'gray'}}>
+      <div {...ArrowKeysReact.events} tabIndex="1" style={{width: '100%', height: '100%', backgroundColor: '#efefef'}}>
         <div>{this.state.content}</div>
-        <div className="App"  style={{width: '800px', height: '800px', backgroundColor: 'black'}}>
-          {
-            map(this.state.view, (row, x) => {
-              return <div className="flex-container">
-                  {map(row, (cell, y) => {
-                    return cell === 1
-                      ? <div className="flex-item khaki"></div>
-                      : <div className="flex-item"></div>
+        <div className="App"  style={{width: '750px', height: '700px', backgroundColor: 'white', marginLeft: '20px', marginTop: '20px'}}>
+          <svg viewBox="0 0 1350 1290">
+            <g>
+              <g className="grid">
+                {map(this.state.view, (row, x) => {
+                  return map(row, (cell, y) => {
+                    cell = cell || {tyleType: 'blocked'};
+                    return <g key={`${x}-${y}`} transform={`translate(${x*150},${x % 2 === 0 ? y*173 : y*173 + 87})`}>
+                            <g>
+                              <polygon points="100,0 50,-87 -50,-87 -100,-0 -50,87 50,87" style={{fill: typeToColorMap[cell.tyleType]}}></polygon>
+                              <text dy="0.4em" transform="rotate(0)">
+                                <tspan className="white-text">{x}</tspan>, <tspan className="white-text">{y}</tspan>
+                              </text>
+                            </g>
+                          </g>
+                  })
+                })}
 
-                  })}
-                </div>
-            })
-          }
+              </g>
+            </g>
+          </svg>
         </div>
       </div>
     );
   }
 }
+
+
+// {
+//   map(this.state.view, (row, x) => {
+//     return <div className="flex-container">
+//         {map(row, (cell, y) => {
+//           cell = cell || {tyleType: 'blocked'};
+//           return <div className="flex-item" style={{background: typeToColorMap[cell.tyleType]}}></div>
+//         })}
+//       </div>
+//   })
+// }
 
 export default App;

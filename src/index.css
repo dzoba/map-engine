@@ -46,3 +46,13 @@ code {
 .khaki {
   background: khaki;
 }
+
+polygon {
+  pointer-events: visiblePainted;
+  stroke: #eee  ;
+  stroke-width: 2px;
+}
+
+.white-text {
+  color: white;
+}
