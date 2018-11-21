@@ -137,17 +137,18 @@ class App extends Component {
                 {map(this.state.view, (row, x) => {
                   return map(row, (cell, y) => {
                     cell = cell || {tyleType: 'blocked'};
-                    return <g key={`${x}-${y}`} transform={`translate(${x*150},${x % 2 === 0 ? y*173 : y*173 + 87})`}>
-                            <g>
-                              <polygon points="100,0 50,-87 -50,-87 -100,-0 -50,87 50,87" style={{fill: typeToColorMap[cell.tyleType]}}></polygon>
-                              <text dy="0.4em" transform="rotate(0)">
-                                <tspan className="white-text">{x}</tspan>, <tspan className="white-text">{y}</tspan>
-                              </text>
-                            </g>
-                          </g>
+                    return (
+                      <g key={`${x}-${y}`} transform={`translate(${x*150},${x % 2 === 0 ? y*173 : y*173 + 87})`}>
+                        <g>
+                          <polygon points="100,0 50,-87 -50,-87 -100,-0 -50,87 50,87" style={{fill: typeToColorMap[cell.tyleType]}}></polygon>
+                          <text dy="0.4em" transform="rotate(0)">
+                            <tspan className="white-text">{x}</tspan>, <tspan className="white-text">{y}</tspan>
+                          </text>
+                        </g>
+                      </g>
+                    );
                   })
                 })}
-
               </g>
             </g>
           </svg>
@@ -156,17 +157,5 @@ class App extends Component {
     );
   }
 }
-
-
-// {
-//   map(this.state.view, (row, x) => {
-//     return <div className="flex-container">
-//         {map(row, (cell, y) => {
-//           cell = cell || {tyleType: 'blocked'};
-//           return <div className="flex-item" style={{background: typeToColorMap[cell.tyleType]}}></div>
-//         })}
-//       </div>
-//   })
-// }
 
 export default App;
