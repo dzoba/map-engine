@@ -30,21 +30,21 @@ class App extends Component {
     ArrowKeysReact.config({
       left: () => {
         this.setState({
-          locX: this.state.locX - 1,
+          locX: this.state.locX - 2,
           content: 'Key detected: left'
         });
         this.calculateVisibleMap({
-          locX: this.state.locX -1,
+          locX: this.state.locX - 2,
           locY: this.state.locY
         })
       },
       right: () => {
         this.setState({
-          locX: this.state.locX + 1,
+          locX: this.state.locX + 2,
           content: 'Key detected: right'
         });
         this.calculateVisibleMap({
-          locX: this.state.locX + 1,
+          locX: this.state.locX + 2,
           locY: this.state.locY
         })
       },
