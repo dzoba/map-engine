@@ -30,42 +30,42 @@ class App extends Component {
     ArrowKeysReact.config({
       left: () => {
         this.setState({
-          locY: this.state.locY - 1,
+          locX: this.state.locX - 1,
           content: 'Key detected: left'
+        });
+        this.calculateVisibleMap({
+          locX: this.state.locX -1,
+          locY: this.state.locY
+        })
+      },
+      right: () => {
+        this.setState({
+          locX: this.state.locX + 1,
+          content: 'Key detected: right'
+        });
+        this.calculateVisibleMap({
+          locX: this.state.locX + 1,
+          locY: this.state.locY
+        })
+      },
+      up: () => {
+        this.setState({
+          locY: this.state.locY - 1,
+          content: 'Key detected: up'
         });
         this.calculateVisibleMap({
           locX: this.state.locX,
           locY: this.state.locY - 1
         })
       },
-      right: () => {
+      down: () => {
         this.setState({
           locY: this.state.locY + 1,
-          content: 'Key detected: right'
+          content: 'Key detected: down'
         });
         this.calculateVisibleMap({
           locX: this.state.locX,
           locY: this.state.locY + 1
-        })
-      },
-      up: () => {
-        this.setState({
-          locX: this.state.locX - 1,
-          content: 'Key detected: up'
-        });
-        this.calculateVisibleMap({
-          locX: this.state.locX - 1,
-          locY: this.state.locY
-        })
-      },
-      down: () => {
-        this.setState({
-          locX: this.state.locX + 1,
-          content: 'Key detected: down'
-        });
-        this.calculateVisibleMap({
-          locX: this.state.locX + 1,
-          locY: this.state.locY
         })
       }
     });
